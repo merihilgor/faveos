@@ -119,7 +119,7 @@ class TicketListController extends TicketsCategoryController
         }
     }
 
-    /**
+   /**
      * KAS
      * Gets ticket-list depending upon which parameter is passed (mytickets, inbox, unassigned etc)
      * @param Request $request
@@ -128,33 +128,24 @@ class TicketListController extends TicketsCategoryController
     public function listTroubleTicket(Request $request)
     {
         try {
-
             //gets no of tickets per page from cache else 10
             $ticketsPerPage = (Cache::has('ticket_per_page')) ? Cache::get('ticket_per_page') : 10;
-
             $this->setRequest($request);
-
             if (isset($this->request->filter_id)) {
                 return $this->getTicketListByFilterId($this->request->filter_id);
             }
-
             $limit = $request->input('limit')?: $ticketsPerPage;
-
             // $sortField = $request->input('sort-field') ?: 'updated_at';
             $sortField = $request->input('sort-field') ?: 'tickets.updated_at';
-
             $sortOrder = $request->input('sort-order') ?: 'desc';
-
             $baseQuery = $this->baseQueryForTickets();
-
             // $tickets = $baseQuery->select('tickets.id', 'tickets.updated_at', 'tickets.created_at', 'tickets.status', 'tickets.user_id', 'assigned_to', 'ticket_number', 'help_topic_id', 'tickets.dept_id', 'tickets.priority_id', 'tickets.source', 'duedate', 'isanswered', 'team_id', 'creator_id', 'location_id')
-            $tickets = $baseQuery->select('tickets.id', 'tickets.updated_at', 'tickets.created_at', 'tickets.status', 'tickets.user_id', 'assigned_to', 'ticket_number', 'help_topic_id', 'tickets.dept_id', 'tickets.priority_id', 'tickets.source', 'duedate', 'isanswered', 'team_id', 'creator_id', 'location_id', 'help_topic.topic')
+            $tickets = $baseQuery->select('tickets.id', 'tickets.updated_at', 'tickets.created_at', 'tickets.status', 'tickets.user_id', 'assigned_to', 'ticket_number', 'help_topic_id', 'tickets.dept_id', 'tickets.priority_id', 'tickets.source', 'duedate', 'isanswered', 'team_id', 'creator_id', 'location_id', 'help_topic.topic', 'ticket_slas.name')
                 ->join('help_topic', 'help_topic.id', '=', 'tickets.help_topic_id') // KAS
+                ->join('ticket_slas', 'ticket_slas.id', '=', 'tickets.sla') // KAS
                 ->orderBy($sortField, $sortOrder)
                 ->paginate($limit)->toArray();
-
             $formattedTickets = $this->formatTickets($tickets);
-
             return successResponse('', $formattedTickets);
         } catch (Exception $e) {
             return errorResponse($e->getMessage());
