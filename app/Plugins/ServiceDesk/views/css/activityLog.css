@@ -1,0 +1,16 @@
+.table{
+	overflow-x: auto;
+}
+#log_desc table,#log_desc table td,#log_desc table tr,#log_desc table th {  
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+#log_desc table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#log_desc table th, #log_desc table td {
+  padding: 15px;
+}

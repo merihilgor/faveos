@@ -1,0 +1,20 @@
+{
+    "/js/serviceDesk.js": "/js/serviceDesk.js",
+    "/js/agent.js": "/js/agent.js",
+    "/js/admin.js": "/js/admin.js",
+    "/js/calendar.js": "/js/calendar.js",
+    "/js/faveoBilling.js": "/js/faveoBilling.js",
+    "/js/faveoReport.js": "/js/faveoReport.js",
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
+    "/js/faveoLog.js": "/js/faveoLog.js",
+    "/js/telephony.js": "/js/telephony.js",
+    "/js/ldap.js": "/js/ldap.js",
+    "/js/navigation.js": "/js/navigation.js",
+    "/js/chat.js": "/js/chat.js",
+    "/js/facebook.js": "/js/facebook.js",
+    "/js/azureActiveDirectory.js": "/js/azureActiveDirectory.js",
+    "/js/whatsapp.js": "/js/whatsapp.js",
+    "/js/twitter.js": "/js/twitter.js",
+    "/js/common.js": "/js/common.js"
+}
